@@ -15,6 +15,9 @@
 #*****************************************************************************
 #*                                                                           *
 #*      $Log: Interfaces.pm,v $
+#*      Revision 0.2  2000/11/27 15:45:33  gellyfish
+#*      test Failed on 5.005
+#*
 #*      Revision 0.1  2000/11/27 08:34:49  gellyfish
 #*      ls
 #*
@@ -83,7 +86,7 @@ use vars qw(
              
 
 
-($VERSION) = q$Revision: 0.1 $ =~ /([\d.]+)/;
+($VERSION) = q$Revision: 0.2 $ =~ /([\d.]+)/;
 
 =head2 METHODS
 
@@ -335,7 +338,7 @@ sub AUTOLOAD
 
   my ( $meth ) = $AUTOLOAD =~ /::([^:]+)$/;
 
-  return $self->interface($name)->$meth ;
+  return $self->interface($name)->$meth() ;
 }
 
 
