@@ -15,6 +15,9 @@
 #*****************************************************************************
 #*                                                                           *
 #*      $Log: Interfaces.pm,v $
+#*      Revision 1.2  2005/02/09 10:12:03  jonathan
+#*      Fixed DESTROY bug
+#*
 #*      Revision 1.1  2005/01/10 21:16:10  jonathan
 #*      * Fixed the DESTROY bug
 #*      * Reorganized the distribution
@@ -98,7 +101,7 @@ use vars qw(
              
 
 
-($VERSION) = q$Revision: 1.1 $ =~ /([\d.]+)/;
+($VERSION) = q$Revision: 1.2 $ =~ /([\d.]+)/;
 
 =head2 METHODS
 
@@ -350,6 +353,7 @@ sub AUTOLOAD
 
   return if $AUTOLOAD =~ /DESTROY$/;
 
+  croak "No name" unless $name;
   return undef unless exists $self->{_desc2index}->{$name};
 
   my ($meth)  = $AUTOLOAD =~ /::([^:]+)$/;
@@ -370,11 +374,16 @@ sub DESTROY
 {
   my ( $self ) = @_;
 
-  $self->close();
+  $self->session()->close();
 }
 
 1;
 __END__
+
+=head1 SUPPORT
+
+Please email any bug reports and/or feature requests directly to the
+author.  Requests through other channels may not be seen.
 
 =head1 AUTHOR
 

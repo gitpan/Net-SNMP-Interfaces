@@ -12,3 +12,6 @@ Revision history for Perl extension Net::SNMP::Interfaces.
         - Typo in error()
         - Added rfc2863 ifXTable stuff
         - Slight improvement in error handling
+
+1.2  Wed Feb  9 10:10:45 GMT 2005
+        - Fixed bug in DESTROY
