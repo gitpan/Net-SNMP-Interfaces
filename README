@@ -26,3 +26,7 @@ then you will either have to become a user with the correct rights or
 install the module somewhere you do have permission - see the section on
 keeping your own private module library elsewhere in the Perl Documentation.
 
+SUPPORT
+=======
+
+Please e-mail any bug reports to the author Jonathan Stowe <jns@gellyfish.com>.

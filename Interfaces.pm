@@ -15,11 +15,16 @@
 #*****************************************************************************
 #*                                                                           *
 #*      $Log: Interfaces.pm,v $
+#*      Revision 0.4  2002/03/14 07:53:32  gellyfish
+#*      * Improvements in the error handling
+#*
+#*      Revision 0.3  2002/03/14 07:09:17  gellyfish
+#*      * Fixed typo in error()
+#*      * test.pl uses Test module
+#*      * Updated changes
+#*
 #*      Revision 0.2  2000/11/27 15:45:33  gellyfish
 #*      test Failed on 5.005
-#*
-#*      Revision 0.1  2000/11/27 08:34:49  gellyfish
-#*      ls
 #*
 #*                                                                           *
 #*                                                                           *
@@ -86,7 +91,7 @@ use vars qw(
              
 
 
-($VERSION) = q$Revision: 0.2 $ =~ /([\d.]+)/;
+($VERSION) = q$Revision: 0.4 $ =~ /([\d.]+)/;
 
 =head2 METHODS
 
@@ -118,7 +123,9 @@ There is a also a fourth optional argument 'RaiseError' which determines
 the behaviour of the module in the event there is an error while creating
 the SNMP.  Normally new() will return undef if there was an error but if
 RaiseError is set to a true value it will die() printing the error string
-to STDERR.
+to STDERR.  If this is not set and an error occurs undef will be return
+and the variable $Net::SNMP::Interfaces::error will contain the test of
+the error.
 
 Because the interfaces are discovered in the constructor, if the module
 is to be used in a long running program to monitor a host where 
@@ -155,6 +162,7 @@ sub new
      }
      else
      {
+       $Net::SNMP::Interfaces::error = $error;
        return undef;
      }
   }
@@ -175,6 +183,7 @@ sub new
      }
      else
      {
+       $Net::SNMP::Interfaces::error = $session->error();
        return undef;
      }
   }
@@ -240,7 +249,7 @@ sub error
 {
   my ($self ) = @_;
 
-  return $self->{_lasterror} || $self->session()-error();
+  return $self->{_lasterror} || $self->session()->error();
 }
 
 =item session()
@@ -336,9 +345,17 @@ sub AUTOLOAD
 
   return undef unless exists $self->{_desc2index}->{$name};
 
-  my ( $meth ) = $AUTOLOAD =~ /::([^:]+)$/;
+  my ($meth)  = $AUTOLOAD =~ /::([^:]+)$/;
 
-  return $self->interface($name)->$meth() ;
+  no strict 'refs';
+
+  *{$AUTOLOAD} = sub {
+                        my ( $self, $name ) = @_;
+                        return $self->interface($name)->$meth() ;
+                     };
+
+  goto &{$AUTOLOAD};
+
 }
 
 
@@ -365,6 +382,5 @@ Perl itself.
 =head1 SEE ALSO
 
 perl(1), Net::SNMP, Net::SNMP::Interfaces::Details.
-
 
 =cut

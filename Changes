@@ -1,6 +1,14 @@
 Revision history for Perl extension Net::SNMP::Interfaces.
 
-0.01  Sat Nov 25 16:09:27 2000
+0.1  Sat Nov 25 16:09:27 2000
 	- original version; created by h2xs 1.20 with options
 		-XA -n Net::SNMP::Interfaces
+0.2  Mon Nov 27 15:45:33 2000
+        - Tested with 5.005
 
+0.3  - Not released
+
+0.4  Thu Mar 14 07:05:51 GMT 2002
+        - Typo in error()
+        - Added rfc2863 ifXTable stuff
+        - Slight improvement in error handling
