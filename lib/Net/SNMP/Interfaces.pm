@@ -15,6 +15,13 @@
 #*****************************************************************************
 #*                                                                           *
 #*      $Log: Interfaces.pm,v $
+#*      Revision 1.1  2005/01/10 21:16:10  jonathan
+#*      * Fixed the DESTROY bug
+#*      * Reorganized the distribution
+#*
+#*      Revision 0.4  2004/03/02 20:28:06  jonathan
+#*      Put back in CVS
+#*
 #*      Revision 0.4  2002/03/14 07:53:32  gellyfish
 #*      * Improvements in the error handling
 #*
@@ -91,7 +98,7 @@ use vars qw(
              
 
 
-($VERSION) = q$Revision: 0.4 $ =~ /([\d.]+)/;
+($VERSION) = q$Revision: 1.1 $ =~ /([\d.]+)/;
 
 =head2 METHODS
 

@@ -15,6 +15,13 @@
 #*****************************************************************************
 #*                                                                           *
 #*      $Log: Details.pm,v $
+#*      Revision 1.2  2005/01/10 21:34:47  jonathan
+#*      Moving files around
+#*
+#*      Revision 1.1  2005/01/10 21:16:20  jonathan
+#*      * Fixed the DESTROY bug
+#*      * Reorganized the distribution
+#*
 #*      Revision 0.3  2002/03/14 07:53:38  gellyfish
 #*      * Improvements in the error handling
 #*
@@ -29,6 +36,7 @@
 package Net::SNMP::Interfaces::Details;
 
 use strict;
+no warnings qw(deprecated);
 
 =head1 NAME
 
@@ -56,7 +64,7 @@ use vars qw(
             $VERSION
            );
 
-($VERSION) = q$Revision: 0.3 $ =~ /([\d.]+)/;
+($VERSION) = q$Revision: 1.2 $ =~ /([\d.]+)/;
 
 my %OIDS = (
              ifInOctets                 => '1.3.6.1.2.1.2.2.1.10',
