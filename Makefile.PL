@@ -8,8 +8,8 @@ WriteMakefile(
         resources => {
             repository => {
                 type => 'git',
-                url  => 'https://github.com/jonathanstowe/TermReadKey.git',
-                web  => 'https://github.com/jonathanstowe/TermReadKey',
+                url  => 'https://github.com/jonathanstowe/Net-SNMP-Interfaces.git',
+                web  => 'https://github.com/jonathanstowe/Net-SNMP-Interfaces',
             },
         },
     },

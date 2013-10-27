@@ -15,5 +15,5 @@ no_index:
     - t
     - inc
 resources:
-  repository: https://github.com/jonathanstowe/TermReadKey.git
-version: 1.3
+  repository: https://github.com/jonathanstowe/Net-SNMP-Interfaces.git
+version: 1.4

@@ -64,7 +64,7 @@ use vars qw(
             $VERSION
            );
 
-($VERSION) = q$Revision: 1.2 $ =~ /([\d.]+)/;
+($VERSION) = q$Revision: 1.4 $ =~ /([\d.]+)/;
 
 my %OIDS = (
              ifInOctets                 => '1.3.6.1.2.1.2.2.1.10',

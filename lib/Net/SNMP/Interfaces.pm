@@ -75,7 +75,7 @@ use vars qw(
              
 
 
-($VERSION) = q$Revision: 1.3 $ =~ /([\d.]+)/;
+($VERSION) = q$Revision: 1.4 $ =~ /([\d.]+)/;
 
 =head2 METHODS
 
