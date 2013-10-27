@@ -2,6 +2,18 @@ use ExtUtils::MakeMaker;
 WriteMakefile(
     'NAME'		=> 'Net::SNMP::Interfaces',
     'VERSION_FROM'	=> 'lib/Net/SNMP/Interfaces.pm', 
-    'PREREQ_PM'		=> {'Net::SNMP' => 3.5,
+    LICENSE      => 'perl',
+    META_MERGE => {
+        'meta-spec' => { version => 2 },
+        resources => {
+            repository => {
+                type => 'git',
+                url  => 'https://github.com/jonathanstowe/TermReadKey.git',
+                web  => 'https://github.com/jonathanstowe/TermReadKey',
+            },
+        },
+    },
+    AUTHOR  => 'Jonathan Stowe <jns@gellyfish.co.uk>',
+    'PREREQ_PM'		=> {'Net::SNMP' => 0,
                          'Test::More' => 0.47 }, 
 );

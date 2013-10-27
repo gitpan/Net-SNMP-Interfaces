@@ -29,5 +29,11 @@ keeping your own private module library elsewhere in the Perl Documentation.
 SUPPORT
 =======
 
-Please e-mail any bug reports or feature requests 
-to the author Jonathan Stowe <jns@gellyfish.com>.
+Please e-mail any bug reports or feature requests  to
+<bug-Net-SNMP-Interfaces@rt.cpan.org> to the author Jonathan Stowe
+<jns@gellyfish.co.uk>.
+
+The code is hosted on Github at https://github.com/jonathanstowe/Net-SNMP-Interfaces
+Please feel free to fork and suggest patches.  Especially welcome would be 
+increased support for newer versions of SNMP (which weren't around when I first
+made this.)

@@ -13,32 +13,6 @@
 #*                                                                           *
 #*                                                                           *
 #*****************************************************************************
-#*                                                                           *
-#*      $Log: Interfaces.pm,v $
-#*      Revision 1.2  2005/02/09 10:12:03  jonathan
-#*      Fixed DESTROY bug
-#*
-#*      Revision 1.1  2005/01/10 21:16:10  jonathan
-#*      * Fixed the DESTROY bug
-#*      * Reorganized the distribution
-#*
-#*      Revision 0.4  2004/03/02 20:28:06  jonathan
-#*      Put back in CVS
-#*
-#*      Revision 0.4  2002/03/14 07:53:32  gellyfish
-#*      * Improvements in the error handling
-#*
-#*      Revision 0.3  2002/03/14 07:09:17  gellyfish
-#*      * Fixed typo in error()
-#*      * test.pl uses Test module
-#*      * Updated changes
-#*
-#*      Revision 0.2  2000/11/27 15:45:33  gellyfish
-#*      test Failed on 5.005
-#*
-#*                                                                           *
-#*                                                                           *
-#*****************************************************************************
 
 package Net::SNMP::Interfaces;
 
@@ -101,7 +75,7 @@ use vars qw(
              
 
 
-($VERSION) = q$Revision: 1.2 $ =~ /([\d.]+)/;
+($VERSION) = q$Revision: 1.3 $ =~ /([\d.]+)/;
 
 =head2 METHODS
 
@@ -109,7 +83,7 @@ use vars qw(
 
 =item new(  HASH %args )
 
-The constructor of the class. It takes three arguments that are passed
+The constructor of the class. It takes several arguments that are passed
 to Net::SNMP :
 
 =over
@@ -127,9 +101,15 @@ is 'public'.
 
 The UDP port that the SNMP service is listening on.  The default is 161.
 
+=item Version
+
+The SNMP version (as described in the L<Net::SNMP> documentation) to be
+used.  The default is 'snmpv1'.  Support for SNMPv3 is currently somehwat
+limited.
+
 =back
 
-There is a also a fourth optional argument 'RaiseError' which determines
+There is a also an optional argument 'RaiseError' which determines
 the behaviour of the module in the event there is an error while creating
 the SNMP.  Normally new() will return undef if there was an error but if
 RaiseError is set to a true value it will die() printing the error string
@@ -154,14 +134,15 @@ sub new
   $self->{_hostname}  = $args{Hostname}  || 'localhost';
   $self->{_community} = $args{Community} || 'public';
   $self->{_port}      = $args{Port}      || 161;
-
+  $self->{_version}   = $args{Version}   || 'snmpv1',
   $self->{_raise}     = $args{RaiseError} || 0;
 
 
   my ($session, $error) = Net::SNMP->session(
                                               -hostname  => $self->{_hostname},
                                               -community => $self->{_community},
-                                              -port      => $self->{_port}
+                                              -port      => $self->{_port},
+                                              -version   => $self->{_version},
                                             );
 
   if (!defined($session)) 
@@ -382,21 +363,27 @@ __END__
 
 =head1 SUPPORT
 
-Please email any bug reports and/or feature requests directly to the
-author.  Requests through other channels may not be seen.
+The code is host on Github at 
+
+     https://github.com/jonathanstowe/Net-SNMP-Interfaces
+
+Pull requests are welcome, especially if they help support SNMPv3 better.
+
+Email to <bug-Net-SNMP-Interfaces@rt.cpan.org> is preferred for non-patch
+requests.
 
 =head1 AUTHOR
 
-Jonathan Stowe <jns@gellyfish.com>
+Jonathan Stowe <jns@gellyfish.co.uk>
 
 =head1 COPYRIGHT
 
-Copyright (c) Jonathan Stowe 2000.  All rights reserved.  This is free
+Copyright (c) Jonathan Stowe 2000 -2013.  All rights reserved.  This is free
 software it can be ditributed and/or modified under the same terms as
 Perl itself.
 
 =head1 SEE ALSO
 
-perl(1), Net::SNMP, Net::SNMP::Interfaces::Details.
+perl(1), L<Net::SNMP>, L<Net::SNMP::Interfaces::Details>.
 
 =cut

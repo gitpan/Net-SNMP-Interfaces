@@ -7,3 +7,4 @@ META.yml
 README
 t/00_compile_nsi.t
 t/01_compile_nsid.t
+META.json                                Module JSON meta-data (added by MakeMaker)
